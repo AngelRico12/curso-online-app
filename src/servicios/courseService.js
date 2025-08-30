@@ -11,3 +11,12 @@ export async function listarCursos() {
 }
 
 
+// src/servicios/courseService.js
+export async function actualizarCurso(id, data) {
+  const courses = readAll();
+  const idx = courses.findIndex(c => c.id === id);
+  if (idx === -1) throw new Error("Curso no encontrado");
+  courses[idx] = { ...courses[idx], ...data };
+  writeAll(courses);
+  return courses[idx];
+}
