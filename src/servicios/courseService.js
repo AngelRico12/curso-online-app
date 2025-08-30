@@ -6,8 +6,10 @@ function readAll() {
   return raw ? JSON.parse(raw) : [];
 }
 
+// src/servicios/courseService.js
 export async function listarCursos() {
   return readAll();
 }
+
 
 
