@@ -11,3 +11,10 @@ export async function listarCursos() {
 }
 
 
+// src/servicios/courseService.js
+export async function eliminarCurso(id) {
+  const courses = readAll();
+  const filtered = courses.filter(c => c.id !== id);
+  writeAll(filtered);
+  return { ok: true };
+}
