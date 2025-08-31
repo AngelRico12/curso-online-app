@@ -1,10 +1,5 @@
-// servicioCursos.js
+// Servicio base sin funcionalidades CRUD
 const STORAGE_KEY = "curso_online_cursos";
 
-function readAll() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  return raw ? JSON.parse(raw) : [];
-}
-
-
-
+// Solo estructura base, sin operaciones
+export {};

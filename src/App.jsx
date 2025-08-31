@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./paginas/Home";
-
+import Courses from "./paginas/Courses";
 import "./index.css";
 
 
@@ -19,7 +19,7 @@ return (
 <main className="container">
 <Routes>
 <Route path="/" element={<Home />} />
-
+<Route path="/cursos" element={<Courses />} />
 </Routes>
 </main>
 <footer className="footer">© {new Date().getFullYear()} Curso Online App</footer>
