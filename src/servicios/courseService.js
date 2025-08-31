@@ -6,8 +6,5 @@ function readAll() {
   return raw ? JSON.parse(raw) : [];
 }
 
-export async function listarCursos() {
-  return readAll();
-}
 
 
