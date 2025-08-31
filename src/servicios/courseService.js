@@ -1,5 +1,22 @@
-// Servicio base sin funcionalidades CRUD
 const STORAGE_KEY = "curso_online_cursos";
 
-// Solo estructura base, sin operaciones
-export {};
+function readAll() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  return raw ? JSON.parse(raw) : [];
+}
+
+function writeAll(courses) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(courses));
+}
+
+export async function crearCurso(data) {
+  const courses = readAll();
+  const newCourse = {
+    id: crypto.randomUUID(),
+    creadoEn: new Date().toISOString(),
+    ...data
+  };
+  courses.push(newCourse);
+  writeAll(courses);
+  return newCourse;
+}
