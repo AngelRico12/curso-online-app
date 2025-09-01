@@ -1,4 +1,25 @@
+import { useEffect, useState } from "react";
+import { listarCursos, crearCurso } from "../servicios/courseService";
+import CourseForm from "../componentes/CourseForm";
+import CourseCard from "../componentes/CourseCard";
+
 function Courses() {
+  const [cursos, setCursos] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
+  async function refresh() {
+    const data = await listarCursos();
+    setCursos(data);
+  }
+
+  useEffect(() => { refresh(); }, []);
+
+  async function handleCreate(payload) {
+    await crearCurso(payload);
+    setShowForm(false);
+    await refresh();
+  }
+
   return (
     <section>
       <div style={{
@@ -8,10 +29,23 @@ function Courses() {
         marginBottom: 12
       }}>
         <h2>Gestión de Cursos</h2>
-        <button className="btn">Nuevo Curso</button>
+        <button className="btn" onClick={() => setShowForm(true)}>Nuevo Curso</button>
       </div>
 
-      <p>No hay cursos aún.</p>
+      {showForm && (
+        <CourseForm
+          initialValues={null}
+          onCancel={() => setShowForm(false)}
+          onSubmit={handleCreate}
+        />
+      )}
+
+      <div className="grid">
+        {cursos.length === 0 && <p>No hay cursos aún. ¡Crea el primero!</p>}
+        {cursos.map((c) => (
+          <CourseCard key={c.id} course={c} />
+        ))}
+      </div>
     </section>
   );
 }
